@@ -1,0 +1,17 @@
+﻿<h4 ng-if="showDetails">{{name}} Details</h4>
+<div class="jumbotron" style=" border: solid 2px black;" ng-if="showDetails">
+    <input type="button" style="float:right;" value="X" ng-click="show(false)" />
+    <div>
+        Name: <b>{{name}}</b> <br />
+        Number:  {{word_number}}<br />
+        Key - Value pairs{
+        <table style="margin-left:50px;">
+            <tr ng-repeat="pair in pairs">
+                <td>{{$index+1}}. {{pair.key}} : {{pair.value}}</td>
+            </tr>
+        </table>
+        }
+        <br />
+        <input type="button" value="edit" ui-sref="edit" ng-click="editDetails(number)" style="float:right;" />
+    </div>
+</div>

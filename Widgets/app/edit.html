@@ -1,0 +1,28 @@
+<h4>{{name}} Edit</h4>
+<div style="border:solid 1px black; padding:30px 20px 50px 20px;width:50%">
+    <span>Name : </span><input type="text" #name ng-model="name" ng-change="isDuplicate(name)" ng-class="{error: duplicate || emptyName}" />
+    <span ng-if="duplicate" class="error">Duplicate</span>
+    <span ng-if="emptyName" class="error">Name field must added</span>
+    <br />
+    <span>Number : </span><input type="number" name="number" ng-model="number" ng-class="{error: emptyNumber}" />
+    <span ng-if="emptyNumber" class="error">Number field must filled</span>
+    <br /> <br /> <br />
+    <p>Key / Value Pairs</p>
+    <div ng-repeat="pair in  pairs track by $index">
+        {{$index+1}}.
+        <input type="text" ng-model="pair.key" ng-class="{error: pair.k}" />
+        <input type="text" ng-model="pair.value" ng-class="{error: pair.v}" />
+        <!-- <input type="button" value="+" />-->
+        <!--<input type="button" value="-" ng-click="removePair(number,pair.key)" />-->
+        <input type="button" value="+" ng-click="addPair(this,$index)" />
+        <input type="button" value="-" ng-click="removePair(this,$index)" />
+        <span ng-if="pair.k && !pair.v" class="error">Key field must added</span>
+        <span ng-if="pair.v && !pair.k" class="error">Value field must added</span>
+        <span ng-if="pair.v && pair.k" class="error">One pair minimum must added</span>
+    </div>
+    <!-- <input type="button" value="+" ng-click="addPair(number)" />-->
+    <!--<input type="button" value="+" ng-click="addPair(this)" />-->
+    <input type="button" value="Cancel" ui-sref="home" ng-click="cancel()" style="float:right;" />
+    <input type="submit" value="Save" ng-click="save(this,new_one)"
+           ng-disabled="duplicate || emptyName " style="float:right;" />
+</div>

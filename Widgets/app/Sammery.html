@@ -1,0 +1,12 @@
+﻿<h4>Widgets Summery</h4>
+<div class="jumbotron ui-view">
+    <ul ng-repeat="widget in widgets track by $index">
+        <li >
+            {{widget.name}}
+            <input type="button" value="delete" class="sammery-btn" ng-click="removeWidget(widget.number)" />
+            <input type="button" value="details" class="sammery-btn" ng-click="getDetails(widget.number)" />
+        </li>
+    </ul>
+
+</div>
+<input type="button" value="Add" ui-sref="edit" ng-click="editDetails()" />
