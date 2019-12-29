@@ -1,4 +1,4 @@
-var widgets = [
+var initialWidgets = [
     {
         name: 'W1',
         number: '99',
@@ -56,31 +56,39 @@ angular
 
             .state('edit', {
                 url: '/edit/{number}',
-                templateUrl: 'edit.html',
+                templateUrl: 'Edit.html',
                 controller: 'editController'
             });
     })
 
     .controller('sammeryController', function ($scope, $rootScope) {
-        $scope.widgets = widgets;
+        var test = sessionStorage.getItem('WidgetsList');
+        if (test == null)
+            sessionStorage.setItem('WidgetsList', JSON.stringify(initialWidgets));
+
+        $scope.widgets = JSON.parse(sessionStorage.getItem('WidgetsList'));
 
         $scope.getDetails = function (number) {
             $rootScope.$emit('getDetails', number);
         }
 
         $scope.removeWidget = function (number) {
+            widgets = JSON.parse(sessionStorage.getItem('WidgetsList'));
             var index = widgets.findIndex(element => element.number == number);
             widgets.splice(index, 1);
+            $scope.widgets = widgets;
+            sessionStorage.setItem('WidgetsList', JSON.stringify(widgets));
             $rootScope.$emit('close');
         }
 
-        $scope.editDetails = function () {
+        $scope.addWidget = function () {
             sessionStorage.setItem('number', 0);
         }
     })
 
     .controller('detailsController', function ($scope, $rootScope, $state) {
         $rootScope.$on('getDetails', function (event, nunber) {
+            widgets = JSON.parse(sessionStorage.getItem('WidgetsList'));
             var t = widgets.filter(obj => { return obj.number == nunber })[0];
             $scope.name = t.name;
             $scope.number = t.number;
@@ -104,6 +112,7 @@ angular
     })
 
     .controller('editController', function ($scope, $state) {
+        widgets = JSON.parse(sessionStorage.getItem('WidgetsList'));
         tempWidget = concatArrars([], widgets);
         $scope.disabled = true;
 
@@ -141,6 +150,7 @@ angular
 
         $scope.save = function (widget, new_one = false) {
             if (valid(widget)) {
+                widgets = JSON.parse(sessionStorage.getItem('WidgetsList'));
                 for (i = widget.pairs.length - 1; i >= 0; i--) {
                     pair = widget.pairs[i];
                     if (pair.key == "" && pair.value == "") {
@@ -155,13 +165,14 @@ angular
                     widgets[t] = { name: widget.name, number: widget.number, pairs: $scope.pairs };
                     widgets = concatArrars([], widgets);
                 }
+                sessionStorage.setItem('WidgetsList', JSON.stringify(widgets));
                 tempWidget = [];
                 $state.go('home');
             }
         }
 
         $scope.cancel = function () {
-            widgets = concatArrars([], tempWidget);
+            //  widgets = JSON.parse(sessionStorage.getItem('WidgetsList'));
         }
 
         $scope.isDuplicate = function (name) {

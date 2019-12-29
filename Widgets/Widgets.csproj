@@ -69,7 +69,7 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\Details.html" />
-    <Content Include="app\edit.html" />
+    <Content Include="app\Edit.html" />
     <Content Include="app\index.html">
       <BrowseToURL>/</BrowseToURL>
     </Content>

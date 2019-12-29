@@ -1,5 +1,5 @@
 ﻿<h4 ng-if="showDetails">{{name}} Details</h4>
-<div class="jumbotron" style=" border: solid 2px black;" ng-if="showDetails">
+<div class="jumbotron" style=" border: solid 2px black;padding-right: 8px;" ng-if="showDetails">
     <input type="button" style="float:right;" value="X" ng-click="show(false)" />
     <div>
         Name: <b>{{name}}</b> <br />
@@ -12,6 +12,6 @@
         </table>
         }
         <br />
-        <input type="button" value="edit" ui-sref="edit" ng-click="editDetails(number)" style="float:right;" />
+        <input type="button" value="Edit" ui-sref="edit" ng-click="editDetails(number)" style="float:right;" />
     </div>
 </div>

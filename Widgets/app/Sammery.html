@@ -1,7 +1,7 @@
 ﻿<h4>Widgets Summery</h4>
 <div class="jumbotron ui-view">
     <ul ng-repeat="widget in widgets track by $index">
-        <li >
+        <li style="border-bottom:solid 1px black;padding-bottom:5px;">
             {{widget.name}}
             <input type="button" value="delete" class="sammery-btn" ng-click="removeWidget(widget.number)" />
             <input type="button" value="details" class="sammery-btn" ng-click="getDetails(widget.number)" />
@@ -9,4 +9,4 @@
     </ul>
 
 </div>
-<input type="button" value="Add" ui-sref="edit" ng-click="editDetails()" />
+<input type="button" value="Add Widget" ui-sref="edit" ng-click="addWidget()" />
